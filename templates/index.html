@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>FLAMES</title>
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan&family=Oswald&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'League Spartan', sans-serif;
+      background-color: #2a2122;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+    .logo {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: 350px;
+      pointer-events: none;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+    .container {
+      display: flex;
+      gap: 200px;
+      margin-top: auto;
+      margin-bottom: auto;
+      align-items: center;
+    }
+    .left {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    label {
+      font-size: 24px;
+      font-weight: bold;
+    }
+    input {
+      padding: 10px 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 30px;
+      background-color: #a4dc50;
+      color: black;
+      width: 300px;
+    }
+    button {
+      background-color: #a4dc50;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      padding: 10px 30px;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      width: 150px;
+      align-self: flex-start;
+      margin-top: 80px;
+      transition: transform 0.1s ease;
+    }
+    button:active {
+      transform: scale(0.95);
+    }
+    .right-box {
+      width: 300px;
+      height: 350px;
+      background-color: #a4dc50;
+      border-radius: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    #scratchCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-radius: 30px;
+    }
+    #resultImage {
+      width: 100%;
+      height: 100%;
+      border-radius: 30px;
+      object-fit: cover;
+      display: none;
+    }
+    #bottomQuote {
+      position: absolute;
+      bottom: 60px;
+      width: 90%;
+      text-align: center;
+      font-size: 28px;
+      font-style: normal;
+      color: white;
+      font-weight: 600;
+      font-family: 'Oswald', sans-serif;
+      display: none;
+      padding: 10px;
+      user-select: none;
+    }
+    #refreshBtn {
+      position: fixed;
+      bottom: 15px;
+      right: 15px;
+      background-color: #a4dc50;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      padding: 10px 20px;
+      font-size: 18px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      transition: background-color 0.3s ease;
+      z-index: 1000;
+    }
+    #refreshBtn:hover {
+      background-color: #8abd43;
+    }
+  </style>
+</head>
+<body>
+  <img src="static/images/logo.png" alt="Top Left Image" class="logo" />
+  <div class="container">
+    <div class="left">
+      <label for="yourName">Your Name</label>
+      <input type="text" id="yourName" placeholder="name" />
+      <label for="crushName">Crush’s Name</label>
+      <input type="text" id="crushName" placeholder="name" />
+      <button id="checkButton">CHECK</button>
+    </div>
+    <div class="right-box" id="scratchArea">
+      <canvas id="scratchCanvas" width="300" height="350"></canvas>
+      <img id="resultImage" src="" alt="FLAMES Result" />
+    </div>
+  </div>
+  <div id="bottomQuote"></div>
+  <audio id="revealSound" src="static/sounds/reveal.mp3" preload="auto"></audio>
+  <button id="refreshBtn" title="Refresh">↻ Refresh</button>
+  <script>
+    function calculateFlames(name1, name2) {
+      name1 = name1.toLowerCase().replace(/ /g, "");
+      name2 = name2.toLowerCase().replace(/ /g, "");
+      for (let char of name1) {
+        if (name2.includes(char)) {
+          name1 = name1.replace(char, '');
+          name2 = name2.replace(char, '');
+        }
+      }
+      let total = name1.length + name2.length;
+      let flames = ['friends', 'love', 'affection', 'marriage', 'enemy', 'siblings'];
+      while (flames.length > 1) {
+        let splitIndex = (total % flames.length) - 1;
+        if (splitIndex >= 0) {
+          flames = flames.slice(splitIndex + 1).concat(flames.slice(0, splitIndex));
+        } else {
+          flames.pop();
+        }
+      }
+      return flames[0];
+    }
+    document.getElementById("checkButton").addEventListener("click", function () {
+      const name1 = document.getElementById("yourName").value.trim();
+      const name2 = document.getElementById("crushName").value.trim();
+      if (!name1 || !name2) {
+        alert("Please enter both names.");
+        return;
+      }
+      const result = calculateFlames(name1, name2);
+      const resultImg = document.getElementById("resultImage");
+      const canvas = document.getElementById("scratchCanvas");
+      const ctx = canvas.getContext("2d");
+      const bottomQuote = document.getElementById("bottomQuote");
+      const revealSound = document.getElementById("revealSound");
+      const quotes = {
+        friendship: "A true friend sees the tears behind your smile.",
+        love: "Love is not about possession, it’s about appreciation.",
+        affection: "Affection is the heartbeat of any relationship.",
+        marriage: "A great marriage is not when perfect people come together, but when imperfect people learn to enjoy their differences.",
+        enemy: "Even an enemy teaches you strength you never knew you had.",
+        siblings: "Siblings: your first friend, your forever rival."
+      };
+      resultImg.src = `static/results/${result}.png`;
+      resultImg.style.display = "block";
+      canvas.style.display = "block";
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      bottomQuote.style.display = "none";
+      bottomQuote.innerText = "";
+      ctx.fillStyle = "#888";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      let scratchedPixels = 0;
+      const totalPixels = canvas.width * canvas.height;
+      const scratchThreshold = 0.45;
+      function scratch(x, y) {
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.beginPath();
+        ctx.arc(x, y, 20, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.globalCompositeOperation = 'source-over';
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        let count = 0;
+        for (let i = 3; i < imageData.data.length; i += 4) {
+          if (imageData.data[i] === 0) count++;
+        }
+        scratchedPixels = count;
+        if ((scratchedPixels / totalPixels) > scratchThreshold) {
+          canvas.style.display = "none";
+          bottomQuote.innerText = quotes[result] || "";
+          bottomQuote.style.display = "block";
+          revealSound.currentTime = 0;
+          revealSound.play();
+        }
+      }
+      canvas.onmousedown = (e) => {
+        const rect = canvas.getBoundingClientRect();
+        scratch(e.clientX - rect.left, e.clientY - rect.top);
+        canvas.onmousemove = (ev) => {
+          scratch(ev.clientX - rect.left, ev.clientY - rect.top);
+        };
+      };
+      canvas.onmouseup = () => canvas.onmousemove = null;
+      canvas.ontouchstart = (e) => {
+        e.preventDefault();
+        const rect = canvas.getBoundingClientRect();
+        const touch = e.touches[0];
+        scratch(touch.clientX - rect.left, touch.clientY - rect.top);
+        canvas.ontouchmove = (ev) => {
+          ev.preventDefault();
+          const touchMove = ev.touches[0];
+          scratch(touchMove.clientX - rect.left, touchMove.clientY - rect.top);
+        };
+      };
+      canvas.ontouchend = () => canvas.ontouchmove = null;
+
+      // 🔐 Google Sheet Logging
+      fetch("https://script.google.com/macros/s/AKfycbw5EATwxAlaU-3ccR7nVRB1De-eBbpGFERQHUjQugrGZpmT0qAyBxrhl8_nFYbduGRF/exec", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name1: name1,
+          name2: name2,
+          result: result
+        }),
+      });
+    });
+    document.getElementById("refreshBtn").addEventListener("click", () => {
+      location.reload();
+    });
+  </script>
+</body>
+</html>
