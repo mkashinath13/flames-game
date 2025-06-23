@@ -193,16 +193,15 @@
       const result = calculateFlames(name1, name2);
 
       // ✅ Google Sheets Logging
-      fetch("https://script.google.com/macros/s/AKfycbw5EATwxAlaU-3ccR7nVRB1De-eBbpGFERQHUjQugrGZpmT0qAyBxrhl8_nFYbduGRF/exec", {
+      fetch("https://docs.google.com/forms/d/e/1FAIpQLSfO0My0wRw4hhhpIANr_YtbAJZQiL_LsG5bf3RlHEL53ybMRQ/formResponse", {
         method: "POST",
+        mode: "no-cors",
         headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
+          "Content-Type": "application/x-www-form-urlencoded"
         },
-        body: `name1=${encodeURIComponent(name1)}&name2=${encodeURIComponent(name2)}&result=${encodeURIComponent(result)}`
-      })
-      .then(response => response.text())
-      .then(data => console.log("Google Sheets Response:", data))
-      .catch(error => console.error("Logging Error:", error));
+        body: `entry.1157424614=${encodeURIComponent(name1)}&entry.660698690=${encodeURIComponent(name2)}&entry.849245782=${encodeURIComponent(result)}`
+      });
+
 
 
 
