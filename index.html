@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <title>FLAMES</title>
   <link href="https://fonts.googleapis.com/css2?family=League+Spartan&family=Oswald&display=swap" rel="stylesheet" />
-
   <style>
     body {
       margin: 0;
@@ -19,7 +18,6 @@
       overflow: hidden;
       position: relative;
     }
-
     .logo {
       position: absolute;
       top: 10px;
@@ -29,7 +27,6 @@
       user-select: none;
       -webkit-user-drag: none;
     }
-
     .container {
       display: flex;
       gap: 200px;
@@ -37,18 +34,15 @@
       margin-bottom: auto;
       align-items: center;
     }
-
     .left {
       display: flex;
       flex-direction: column;
       gap: 20px;
     }
-
     label {
       font-size: 24px;
       font-weight: bold;
     }
-
     input {
       padding: 10px 20px;
       font-size: 18px;
@@ -58,7 +52,6 @@
       color: black;
       width: 300px;
     }
-
     button {
       background-color: #a4dc50;
       color: white;
@@ -73,11 +66,9 @@
       margin-top: 80px;
       transition: transform 0.1s ease;
     }
-
     button:active {
       transform: scale(0.95);
     }
-
     .right-box {
       width: 300px;
       height: 350px;
@@ -89,14 +80,12 @@
       position: relative;
       overflow: hidden;
     }
-
     #scratchCanvas {
       position: absolute;
       top: 0;
       left: 0;
       border-radius: 30px;
     }
-
     #resultImage {
       width: 100%;
       height: 100%;
@@ -104,7 +93,6 @@
       object-fit: cover;
       display: none;
     }
-
     #bottomQuote {
       position: absolute;
       bottom: 60px;
@@ -119,7 +107,6 @@
       padding: 10px;
       user-select: none;
     }
-
     #refreshBtn {
       position: fixed;
       bottom: 15px;
@@ -135,7 +122,6 @@
       transition: background-color 0.3s ease;
       z-index: 1000;
     }
-
     #refreshBtn:hover {
       background-color: #8abd43;
     }
@@ -205,6 +191,23 @@
       }
 
       const result = calculateFlames(name1, name2);
+
+      // ✅ Google Sheets Logging
+      fetch("https://script.google.com/macros/s/AKfycbw5EATwxAlaU-3ccR7nVRB1De-eBbpGFERQHUjQugrGZpmT0qAyBxrhl8_nFYbduGRF/exec", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name1: name1,
+          name2: name2,
+          result: result
+        }),
+      })
+      .then(response => response.text())
+      .then(data => console.log("Google Sheets Response:", data))
+      .catch(error => console.error("Logging Error:", error));
+
       const resultImg = document.getElementById("resultImage");
       const canvas = document.getElementById("scratchCanvas");
       const ctx = canvas.getContext("2d");
@@ -288,6 +291,5 @@
       location.reload();
     });
   </script>
-
 </body>
 </html>
