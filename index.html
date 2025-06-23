@@ -197,12 +197,13 @@
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
-         },
+        },
         body: `name1=${encodeURIComponent(name1)}&name2=${encodeURIComponent(name2)}&result=${encodeURIComponent(result)}`
-        })
-        .then(response => response.text())
-        .then(data => console.log("Google Sheets Response:", data))
-        .catch(error => console.error("Logging Error:", error));
+      })
+      .then(response => response.text())
+      .then(data => console.log("Google Sheets Response:", data))
+      .catch(error => console.error("Logging Error:", error));
+
 
 
 
