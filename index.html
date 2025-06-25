@@ -2,228 +2,259 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>FLAMES</title>
-  <meta name="google-site-verification" content="uGcn3gvOBL5V2E31AVA4J3OKtFXe0yHQfW0rQwSrn-0" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FLAMES Game - Love Compatibility Calculator</title>
+  
+  <!-- SEO Meta Tags -->
   <meta name="description" content="FLAMES - A fun love calculator game. Find your relationship with your crush by name matching.">
   <meta name="keywords" content="flames, love game, love calculator, crush checker, relationship finder, flames game">
-  <meta name="kashi" content="flames">
+  <meta name="author" content="Kashinath">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- Google Site Verification -->
+  <meta name="google-site-verification" content="uGcn3gvOBL5V2E31AVA4J3OKtFXe0yHQfW0rQwSrn-0" />
 
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="FLAMES Game - Love Compatibility Test" />
+  <meta property="og:description" content="Enter your name and your crush's to discover if you're Friends, Lovers, or something more!" />
+  <meta property="og:image" content="https://mkashinath13.github.io/flames-game/static/images/logo.png" />
+  <meta property="og:url" content="https://mkashinath13.github.io/flames-game/" />
+  <meta property="og:type" content="website" />
+
+  <!-- Twitter Card Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="FLAMES Game - Love Compatibility Test" />
+  <meta name="twitter:description" content="Enter two names and find out your FLAMES result!" />
+  <meta name="twitter:image" content="https://mkashinath13.github.io/flames-game/static/images/logo.png" />
+
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=League+Spartan&family=Oswald&display=swap" rel="stylesheet" />
+
   <style>
-  * {
-    box-sizing: border-box;
-  }
-
-  html, body {
-    margin: 0;
-    padding: 0;
-    font-family: 'League Spartan', sans-serif;
-    background-color: #2a2122;
-    color: white;
-    min-height: 100vh;
-    width: 100%;
-  }
-
-  body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow-x: hidden;
-    padding-top: 100px;
-  }
-
-  .logo {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    width: 180px;
-    pointer-events: none;
-    user-select: none;
-  }
-
-  .container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 100px;
-    flex-wrap: wrap;
-    max-width: 1200px;
-    width: 100%;
-    padding: 20px;
-  }
-
-  .left {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 100%;
-    max-width: 320px;
-    align-items: center;
-  }
-
-  label {
-    font-size: 22px;
-    font-weight: bold;
-  }
-
-  input {
-    padding: 10px 20px;
-    font-size: 18px;
-    border: none;
-    border-radius: 30px;
-    background-color: #a4dc50;
-    color: black;
-    width: 100%;
-  }
-
-  button {
-    background-color: #a4dc50;
-    color: white;
-    border: none;
-    border-radius: 30px;
-    padding: 10px 30px;
-    font-size: 20px;
-    font-weight: bold;
-    cursor: pointer;
-    width: 200px;
-    text-align: center;
-    transition: transform 0.1s ease;
-    margin-top: 30px;
-  }
-
-  button:active {
-    transform: scale(0.95);
-  }
-
-  .right-box {
-    width: 100%;
-    max-width: 320px;
-    aspect-ratio: 3 / 3.5;
-    background-color: #a4dc50;
-    border-radius: 30px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  #scratchCanvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    border-radius: 30px;
-    width: 100%;
-    height: 100%;
-  }
-
-  #resultImage {
-    width: 100%;
-    height: 100%;
-    border-radius: 30px;
-    object-fit: cover;
-    display: none;
-  }
-
-  #bottomQuote {
-    position: absolute;
-    bottom: 40px;
-    width: 90%;
-    text-align: center;
-    font-size: 22px;
-    font-style: normal;
-    color: white;
-    font-weight: 600;
-    font-family: 'Oswald', sans-serif;
-    display: none;
-    padding: 10px;
-    user-select: none;
-  }
-
-  #refreshBtn {
-    position: fixed;
-    bottom: 25px;
-    right: 25px;
-    background-color: #a4dc50;
-    color: white;
-    border: none;
-    border-radius: 30px;
-    padding: 8px 18px;
-    font-size: 16px;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    transition: background-color 0.3s ease;
-    z-index: 1000;
-  }
-
-  #refreshBtn:hover {
-    background-color: #8abd43;
-  }
-
-  @media (max-width: 768px) {
-    body {
-      padding-top: 120px;
-      justify-content: flex-start;
+    * {
+      box-sizing: border-box;
     }
 
-    .container {
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'League Spartan', sans-serif;
+      background-color: #2a2122;
+      color: white;
+      min-height: 100vh;
+      width: 100%;
+    }
+
+    body {
+      display: flex;
       flex-direction: column;
-      gap: 50px;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow-x: hidden;
+      padding-top: 100px;
     }
 
     .logo {
-      width: 140px;
-      top: 10px;
-      left: 50%;
-      transform: translateX(-50%);
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 180px;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .intro {
+      text-align: center;
+      max-width: 800px;
+      margin: 30px 15px;
+    }
+
+    .intro h1 {
+      font-size: 32px;
+      color: #a4dc50;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 100px;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      width: 100%;
+      padding: 20px;
+    }
+
+    .left {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 100%;
+      max-width: 320px;
+      align-items: center;
+    }
+
+    label {
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    input {
+      padding: 10px 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 30px;
+      background-color: #a4dc50;
+      color: black;
+      width: 100%;
     }
 
     button {
-      width: 100%;
-      max-width: 250px;
-      font-size: 18px;
-      margin-top: 20px;
+      background-color: #a4dc50;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      padding: 10px 30px;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      width: 200px;
+      text-align: center;
+      transition: transform 0.1s ease;
+      margin-top: 30px;
+    }
+
+    button:active {
+      transform: scale(0.95);
     }
 
     .right-box {
-      width: 90vw;
-      height: calc(90vw * 1.15);
+      width: 100%;
+      max-width: 320px;
+      aspect-ratio: 3 / 3.5;
+      background-color: #a4dc50;
+      border-radius: 30px;
+      position: relative;
+      overflow: hidden;
     }
 
-    #scratchCanvas, #resultImage {
-      width: 100% !important;
-      height: 100% !important;
+    #scratchCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-radius: 30px;
+      width: 100%;
+      height: 100%;
+    }
+
+    #resultImage {
+      width: 100%;
+      height: 100%;
+      border-radius: 30px;
+      object-fit: cover;
+      display: none;
     }
 
     #bottomQuote {
-      font-size: 18px;
-      bottom: 20px;
+      position: absolute;
+      bottom: 40px;
+      width: 90%;
+      text-align: center;
+      font-size: 22px;
+      font-style: normal;
+      color: white;
+      font-weight: 600;
+      font-family: 'Oswald', sans-serif;
+      display: none;
+      padding: 10px;
+      user-select: none;
     }
 
     #refreshBtn {
-      bottom: 15px;
-      right: 15px;
-      padding: 6px 14px;
-      font-size: 14px;
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background-color: #a4dc50;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      padding: 8px 18px;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      transition: background-color 0.3s ease;
+      z-index: 1000;
     }
-  }
-</style>
 
+    #refreshBtn:hover {
+      background-color: #8abd43;
+    }
 
+    @media (max-width: 768px) {
+      body {
+        padding-top: 120px;
+        justify-content: flex-start;
+      }
 
+      .container {
+        flex-direction: column;
+        gap: 50px;
+      }
+
+      .logo {
+        width: 120px;
+        top: 10px;
+        left: 10px;
+      }
+
+      button {
+        width: 100%;
+        max-width: 250px;
+        font-size: 18px;
+        margin-top: 20px;
+      }
+
+      .right-box {
+        width: 90vw;
+        height: calc(90vw * 1.15);
+      }
+
+      #scratchCanvas, #resultImage {
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      #bottomQuote {
+        font-size: 18px;
+        bottom: 20px;
+      }
+
+      #refreshBtn {
+        bottom: 15px;
+        right: 15px;
+        padding: 6px 14px;
+        font-size: 14px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-  <img src="static/images/logo.png" alt="Top Left Image" class="logo" />
+  <img src="static/images/logo.png" alt="FLAMES Logo" class="logo" />
+
+  <div class="intro">
+    <h1>FLAMES Game - Fun Love Calculator</h1>
+    <p>Enter your name and your crush's name to find out your relationship: Friends, Lovers, Affection, Marriage, Enemies, or Siblings. Try the classic FLAMES test now!</p>
+  </div>
 
   <div class="container">
     <div class="left">
       <label for="yourName">Your Name</label>
-      <input type="text" id="yourName" placeholder="name" />
+      <input type="text" id="yourName" placeholder="Enter your name" />
 
       <label for="crushName">Crush’s Name</label>
-      <input type="text" id="crushName" placeholder="name" />
+      <input type="text" id="crushName" placeholder="Enter crush's name" />
 
       <button id="checkButton">CHECK</button>
     </div>
@@ -273,7 +304,7 @@
 
       const result = calculateFlames(name1, name2);
 
-      // ✅ Google Form Logging (replace with your form URL & field IDs)
+      // 🔒 Google Form Logging (hidden)
       fetch("https://docs.google.com/forms/d/e/1FAIpQLSfO0My0wRw4hhhpIANr_YtbAJZQiL_LsG5bf3RlHEL53ybMRQ/formResponse", {
         method: "POST",
         mode: "no-cors",
