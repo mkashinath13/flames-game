@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <title>FLAMES Game - Love Compatibility Calculator</title>
-  
+
   <!-- SEO Meta Tags -->
   <meta name="description" content="FLAMES - A fun love calculator game. Find your relationship with your crush by name matching.">
   <meta name="keywords" content="flames, love game, love calculator, crush checker, relationship finder, flames game">
   <meta name="author" content="Kashinath">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
+
   <!-- Google Site Verification -->
   <meta name="google-site-verification" content="uGcn3gvOBL5V2E31AVA4J3OKtFXe0yHQfW0rQwSrn-0" />
 
@@ -26,14 +26,17 @@
   <meta name="twitter:description" content="Enter two names and find out your FLAMES result!" />
   <meta name="twitter:image" content="https://mkashinath13.github.io/flames-game/static/images/logo.png" />
 
-  <!-- Fonts -->
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="shortcut icon" href="favicon.ico">
+
   <link href="https://fonts.googleapis.com/css2?family=League+Spartan&family=Oswald&display=swap" rel="stylesheet" />
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
+    * { box-sizing: border-box; }
     html, body {
       margin: 0;
       padding: 0;
@@ -43,7 +46,6 @@
       min-height: 100vh;
       width: 100%;
     }
-
     body {
       display: flex;
       flex-direction: column;
@@ -53,7 +55,6 @@
       overflow-x: hidden;
       padding-top: 100px;
     }
-
     .logo {
       position: absolute;
       top: 20px;
@@ -62,18 +63,15 @@
       pointer-events: none;
       user-select: none;
     }
-
     .intro {
       text-align: center;
       max-width: 800px;
       margin: 30px 15px;
     }
-
     .intro h1 {
       font-size: 32px;
       color: #a4dc50;
     }
-
     .container {
       display: flex;
       flex-direction: row;
@@ -85,7 +83,6 @@
       width: 100%;
       padding: 20px;
     }
-
     .left {
       display: flex;
       flex-direction: column;
@@ -94,12 +91,10 @@
       max-width: 320px;
       align-items: center;
     }
-
     label {
       font-size: 22px;
       font-weight: bold;
     }
-
     input {
       padding: 10px 20px;
       font-size: 18px;
@@ -109,7 +104,6 @@
       color: black;
       width: 100%;
     }
-
     button {
       background-color: #a4dc50;
       color: white;
@@ -124,11 +118,7 @@
       transition: transform 0.1s ease;
       margin-top: 30px;
     }
-
-    button:active {
-      transform: scale(0.95);
-    }
-
+    button:active { transform: scale(0.95); }
     .right-box {
       width: 100%;
       max-width: 320px;
@@ -138,7 +128,6 @@
       position: relative;
       overflow: hidden;
     }
-
     #scratchCanvas {
       position: absolute;
       top: 0;
@@ -147,7 +136,6 @@
       width: 100%;
       height: 100%;
     }
-
     #resultImage {
       width: 100%;
       height: 100%;
@@ -155,7 +143,6 @@
       object-fit: cover;
       display: none;
     }
-
     #bottomQuote {
       position: absolute;
       bottom: 40px;
@@ -170,7 +157,6 @@
       padding: 10px;
       user-select: none;
     }
-
     #refreshBtn {
       position: fixed;
       bottom: 25px;
@@ -186,50 +172,52 @@
       transition: background-color 0.3s ease;
       z-index: 1000;
     }
-
-    #refreshBtn:hover {
-      background-color: #8abd43;
+    #refreshBtn:hover { background-color: #8abd43; }
+    #warningNotice {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #ff4444;
+      color: white;
+      text-align: center;
+      font-size: 16px;
+      padding: 8px;
+      animation: blink 1s infinite;
+      z-index: 999;
+      font-weight: bold;
     }
-
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
     @media (max-width: 768px) {
       body {
         padding-top: 120px;
         justify-content: flex-start;
       }
-
       .container {
         flex-direction: column;
         gap: 50px;
       }
-
       .logo {
         width: 120px;
         top: 10px;
         left: 10px;
       }
-
+      .right-box {
+        width: 90vw;
+        height: calc(90vw * 1.2);
+      }
       button {
         width: 100%;
         max-width: 250px;
         font-size: 18px;
         margin-top: 20px;
       }
-
-      .right-box {
-        width: 90vw;
-        height: calc(90vw * 1.15);
-      }
-
-      #scratchCanvas, #resultImage {
-        width: 100% !important;
-        height: 100% !important;
-      }
-
       #bottomQuote {
         font-size: 18px;
         bottom: 20px;
       }
-
       #refreshBtn {
         bottom: 15px;
         right: 15px;
@@ -240,37 +228,28 @@
   </style>
 </head>
 <body>
-
   <img src="static/images/logo.png" alt="FLAMES Logo" class="logo" />
-
   <div class="intro">
     <h1>FLAMES Game - Fun Love Calculator</h1>
     <p>Enter your name and your crush's name to find out your relationship: Friends, Lovers, Affection, Marriage, Enemies, or Siblings. Try the classic FLAMES test now!</p>
   </div>
-
   <div class="container">
     <div class="left">
       <label for="yourName">Your Name</label>
       <input type="text" id="yourName" placeholder="Enter your name" />
-
       <label for="crushName">Crush’s Name</label>
       <input type="text" id="crushName" placeholder="Enter crush's name" />
-
       <button id="checkButton">CHECK</button>
     </div>
-
     <div class="right-box" id="scratchArea">
       <canvas id="scratchCanvas" width="300" height="350"></canvas>
       <img id="resultImage" src="" alt="FLAMES Result" />
     </div>
   </div>
-
   <div id="bottomQuote"></div>
-
+  <div id="warningNotice">⚠️ This website is for fun and entertainment only. No data is stored.</div>
   <audio id="revealSound" src="static/sounds/reveal.mp3" preload="auto"></audio>
-
   <button id="refreshBtn" title="Refresh">↻ Refresh</button>
-
   <script>
     function calculateFlames(name1, name2) {
       name1 = name1.toLowerCase().replace(/ /g, "");
@@ -293,7 +272,6 @@
       }
       return flames[0];
     }
-
     document.getElementById("checkButton").addEventListener("click", function () {
       const name1 = document.getElementById("yourName").value.trim();
       const name2 = document.getElementById("crushName").value.trim();
@@ -301,10 +279,7 @@
         alert("Please enter both names.");
         return;
       }
-
       const result = calculateFlames(name1, name2);
-
-      // 🔒 Google Form Logging (hidden)
       fetch("https://docs.google.com/forms/d/e/1FAIpQLSfO0My0wRw4hhhpIANr_YtbAJZQiL_LsG5bf3RlHEL53ybMRQ/formResponse", {
         method: "POST",
         mode: "no-cors",
@@ -313,13 +288,11 @@
         },
         body: `entry.1157424614=${encodeURIComponent(name1)}&entry.660698690=${encodeURIComponent(name2)}&entry.849245782=${encodeURIComponent(result)}`
       });
-
       const resultImg = document.getElementById("resultImage");
       const canvas = document.getElementById("scratchCanvas");
       const ctx = canvas.getContext("2d");
       const bottomQuote = document.getElementById("bottomQuote");
       const revealSound = document.getElementById("revealSound");
-
       const quotes = {
         friendship: "A true friend sees the tears behind your smile.",
         love: "Love is not about possession, it’s about appreciation.",
@@ -328,46 +301,37 @@
         enemy: "Even an enemy teaches you strength you never knew you had.",
         siblings: "Siblings: your first friend, your forever rival."
       };
-
+      revealSound.currentTime = 0;
+      revealSound.play();
       resultImg.src = `static/results/${result}.png`;
       resultImg.style.display = "block";
-
       canvas.style.display = "block";
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       bottomQuote.style.display = "none";
       bottomQuote.innerText = "";
-
       ctx.fillStyle = "#888";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-
       let scratchedPixels = 0;
       const totalPixels = canvas.width * canvas.height;
       const scratchThreshold = 0.45;
-
       function scratch(x, y) {
         ctx.globalCompositeOperation = 'destination-out';
         ctx.beginPath();
         ctx.arc(x, y, 20, 0, 2 * Math.PI);
         ctx.fill();
         ctx.globalCompositeOperation = 'source-over';
-
         const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
         let count = 0;
         for (let i = 3; i < imageData.data.length; i += 4) {
           if (imageData.data[i] === 0) count++;
         }
-
         scratchedPixels = count;
-
         if ((scratchedPixels / totalPixels) > scratchThreshold) {
           canvas.style.display = "none";
           bottomQuote.innerText = quotes[result] || "";
           bottomQuote.style.display = "block";
-          revealSound.currentTime = 0;
-          revealSound.play();
         }
       }
-
       canvas.onmousedown = (e) => {
         const rect = canvas.getBoundingClientRect();
         scratch(e.clientX - rect.left, e.clientY - rect.top);
@@ -376,7 +340,6 @@
         };
       };
       canvas.onmouseup = () => canvas.onmousemove = null;
-
       canvas.ontouchstart = (e) => {
         e.preventDefault();
         const rect = canvas.getBoundingClientRect();
@@ -390,7 +353,6 @@
       };
       canvas.ontouchend = () => canvas.ontouchmove = null;
     });
-
     document.getElementById("refreshBtn").addEventListener("click", () => {
       location.reload();
     });
