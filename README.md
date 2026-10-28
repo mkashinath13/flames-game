@@ -37,7 +37,7 @@ This interactive HTML5 version features a modern UI with a **scratchable card** 
 ## ✨ Features
 
 ### 🎨 Modern User Interface
-- **Dark theme** with sleek design
+- **Dark and light themes** with a toggle that remembers your preference
 - **Responsive layout** that works on desktop and mobile devices
 - **Google Fonts** integration (League Spartan & Oswald)
 - **Smooth animations** and transitions
@@ -223,7 +223,8 @@ The FLAMES algorithm works as follows:
 ## 📊 Features Breakdown
 
 ### 🎨 UI/UX
-- Modern dark theme (#2a2122 background)
+- Dark theme by default (#2a2122 background) with a persistent dark/light toggle
+- Light theme with a warm off-white background
 - Accent color: Lime Green (#a4dc50)
 - Responsive flex layout
 - Smooth button transitions
