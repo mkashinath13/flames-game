@@ -9,11 +9,13 @@
       color-scheme: dark;
       --page-background: #2a2122;
       --page-text: white;
+      --heading-color: #a4dc50;
     }
     :root[data-theme="light"] {
       color-scheme: light;
       --page-background: #f7f5f2;
       --page-text: #2a2122;
+      --heading-color: #3b6b10;
     }
     body {
       margin: 0;
@@ -80,7 +82,7 @@
     }
     button {
       background-color: #a4dc50;
-      color: white;
+      color: #2a2122;
       border: none;
       border-radius: 30px;
       padding: 10px 30px;
@@ -120,8 +122,8 @@
       display: none;
     }
     #bottomQuote {
-      position: absolute;
-      bottom: 60px;
+      position: relative;
+      margin: 20px auto 40px auto;
       width: 90%;
       text-align: center;
       font-size: 28px;

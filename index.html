@@ -49,12 +49,14 @@
       color-scheme: dark;
       --page-background: #2a2122;
       --page-text: white;
+      --heading-color: #a4dc50;
     }
 
     :root[data-theme="light"] {
       color-scheme: light;
       --page-background: #f7f5f2;
       --page-text: #2a2122;
+      --heading-color: #3b6b10;
     }
 
     html,
@@ -74,6 +76,7 @@
       align-items: center;
       justify-content: center;
       padding-top: 100px;
+      padding-bottom: 50px;
       position: relative;
       overflow-x: hidden;
     }
@@ -95,7 +98,7 @@
 
     .intro h1 {
       font-size: 32px;
-      color: #a4dc50;
+      color: var(--heading-color);
     }
 
     #themeToggle {
@@ -158,7 +161,7 @@
 
     button {
       background-color: #a4dc50;
-      color: white;
+      color: #2a2122;
       border: none;
       border-radius: 30px;
       padding: 10px 30px;
@@ -236,8 +239,8 @@
     }
 
     #bottomQuote {
-      position: absolute;
-      bottom: 40px;
+      position: relative;
+      margin: 20px auto 40px auto;
       width: 90%;
       text-align: center;
       font-size: 22px;
@@ -326,7 +329,7 @@
 
       #bottomQuote {
         font-size: 18px;
-        bottom: 20px;
+        margin: 15px auto 40px auto;
       }
 
       #refreshBtn {
