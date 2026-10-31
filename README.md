@@ -43,7 +43,7 @@ This interactive HTML5 version features a modern UI with a **scratchable card** 
 - **Smooth animations** and transitions
 
 ### 🎯 Interactive Scratch-Off Card
-- Beautiful **yellow-green (#a4dc50)** scratch card
+- Playful **coral, peach, and violet gradient** scratch card
 - Smooth scratchable overlay with visual feedback
 - Reveals the result image when 45% of the card is scratched
 - Works on both **mouse and touch devices**
@@ -67,12 +67,12 @@ This interactive HTML5 version features a modern UI with a **scratchable card** 
 2. Enter **your name** in the first input field
 3. Enter your **crush's name** (or friend's name) in the second field
 
-### Step 2: Click CHECK
-- Click the green **"CHECK"** button to calculate the relationship type
-- A gray scratch card will appear on the right side
+### Step 2: Find Your Result
+- Click **"Find our FLAMES"** to calculate the relationship type
+- A colorful scratch card will appear beside the name fields
 
 ### Step 3: Scratch to Reveal
-- **Mouse**: Click and drag across the gray card to scratch it away
+- **Mouse**: Click and drag across the gradient card to scratch it away
 - **Touch**: Swipe your finger across the card on mobile devices
 - Continue scratching until 45% of the card is revealed
 
@@ -223,11 +223,10 @@ The FLAMES algorithm works as follows:
 ## 📊 Features Breakdown
 
 ### 🎨 UI/UX
-- Dark theme by default (#2a2122 background) with a persistent dark/light toggle
-- Light theme with a warm off-white background
-- Accent color: Lime Green (#a4dc50)
-- Responsive flex layout
-- Smooth button transitions
+- Light theme by default with a persistent light/dark toggle
+- Warm coral, peach, and violet accents with a coordinating dark theme
+- Responsive grid layout for desktop and mobile
+- Smooth button transitions and card animations
 
 ### 🖱️ Interaction
 - Real-time scratch detection
